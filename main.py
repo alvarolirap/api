@@ -6,7 +6,6 @@ params = urllib.parse.quote_plus('Driver={ODBC Driver 18 for SQL Server};Server=
 database_uri = "mssql+pyodbc:///?odbc_connect=%s" % params
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = database_uri
-
 db = SQLAlchemy(app)
 
 class Employee(db.Model):
@@ -216,6 +215,10 @@ def create_departments():
             status_code = 400
 
     return jsonify(response), status_code
+
+@app.route("/")
+def hello():
+    return "<h1>Hello World!</h1>"
 
 if __name__ == '__main__':
     app.run()
